@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VaultDoor : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int id;
     void Start()
     {
         
