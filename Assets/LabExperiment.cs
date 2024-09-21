@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LabExperiment : MonoBehaviour
 {
-
+    public GameObject enemyPrefab;
     // Start is called before the first frame update
     void Start()
     {
