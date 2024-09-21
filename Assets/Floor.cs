@@ -8,7 +8,7 @@ public class Floor : MonoBehaviour
     public GameObject floorPrefab;
     void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector3(GameManager.Instance.speed, 0, 0);
+        GetComponent<Rigidbody2D>().velocity = new Vector3(GameManager.Instance.floorSpeed, 0, 0);
     }
 
     // Update is called once per frame
