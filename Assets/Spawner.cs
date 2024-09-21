@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     int curTime = 0;
     void Start()
     {
-        
+        StartCoroutine(spawnThing());
     }
 
     // Update is called once per frame
@@ -31,7 +31,11 @@ public class Spawner : MonoBehaviour
 
     IEnumerator spawnThing(){
         while(true){
-
+            yield return new WaitForSeconds(Random.Range(GameManager.Instance.spawnTimeRange[0], GameManager.Instance.spawnTimeRange[1]));
+            if(Random.Range(0,100)<5){
+                //flip a 50/50 coin for obstacle vs enemy
+                spawnEnemy();
+            }
         }
     }
 
