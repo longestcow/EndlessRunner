@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    int currentRow = 3;
+    public int currentRow = 3;
     Rigidbody2D rb;
     void Start()
     {
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("w") && currentRow!=1) 
+        if(Input.GetKeyDown("w") && currentRow!=GameManager.Instance.currentVault-1 && currentRow!=GameManager.Instance.currentVault) 
             currentRow-=1;
         else if(Input.GetKeyDown("s") && currentRow!=6)
             currentRow+=1;
