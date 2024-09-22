@@ -11,13 +11,15 @@ public class PlayerController : MonoBehaviour
     public bool ammo = true;
     public Animator animator;
 
-    Vector3 mousePos,direction; 
+    Vector3 mousePos,direction = new Vector2(1,0); 
     float rotZ;
     GameObject gunPivot;
     LineRenderer line;
 
     VaultDoor vault;
     public Image ammoIcon;
+
+    int pStickVal = 0, stickVal = 0;
 
     void Start()
     {
@@ -32,23 +34,28 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name=="gabeDead") return;
+        stickVal = Input.GetAxis("Vertical")>0.8f?1:Input.GetAxis("Vertical")<-0.8f?-1:0;
+        print(stickVal);
 
-        if(Input.GetKeyDown("w") && currentRow-1!=GameManager.Instance.currentVault) 
-            currentRow-=1;
-        else if(Input.GetKeyDown("s") && currentRow!=6)
-            currentRow+=1;
+        if(stickVal!=pStickVal){
+            if(stickVal==1 && currentRow-1!=GameManager.Instance.currentVault)
+                currentRow-=1;
+            else if(stickVal==-1 && currentRow!=6)
+                currentRow+=1;
+        }
         
         rb.position = new Vector3(rb.position.x,GameManager.Instance.rowPositions[currentRow-1], 0);
 
         mousePos=Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction=gunPivot.transform.position-mousePos;
-        RaycastHit2D hit = Physics2D.Raycast(gunPivot.transform.position, -direction, 200, ~(1 << 8));
-        if(hit.collider != null){
-            line.SetPosition(0, gunPivot.transform.position);
-            line.SetPosition(1,hit.point);
-        }
+        if(new Vector2(Input.GetAxis("RHorizontal"), Input.GetAxis("RVertical")) != Vector2.zero)
+            direction = new Vector2(Input.GetAxis("RHorizontal"), Input.GetAxis("RVertical")).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(gunPivot.transform.position, direction, 200, ~(1 << 8));
+        line.SetPosition(0, gunPivot.transform.position);
+        line.SetPosition(1,hit.point);
+        
 
-        if(Input.GetKeyDown("space") && ammo){
+        if((Input.GetButtonDown("shoot") || ((int)Input.GetAxisRaw("Trigger"))!=0) && ammo){
             toggleAmmo();
             animator.SetTrigger("shoot");
             if(hit.collider.gameObject.layer==7) {
@@ -59,6 +66,8 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(spawnNewAmmo());
             }
         }
+
+        pStickVal = stickVal;
         
     }
 
