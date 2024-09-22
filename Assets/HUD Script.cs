@@ -26,12 +26,7 @@ public class HUDScript : MonoBehaviour
     void Update()
     {
         
-        if (gameEnd && run){
-            finalTime = Mathf.Round(currentTime * 100f) / 100f;
-            run = false;
-            print(finalTime);
-        }
-        else if (run){
+        if (run){
             currentTime = Time.time - GameManager.Instance.startTime;
             minutes = Mathf.FloorToInt(currentTime / 60);
             seconds = Mathf.FloorToInt(currentTime % 60);
@@ -45,5 +40,11 @@ public class HUDScript : MonoBehaviour
             }
     
         }
+    }
+
+    public void GameEnd(){
+        gameEnd=true;
+        finalTime = Mathf.Round(currentTime * 100f) / 100f;
+        run=false;
     }
 }

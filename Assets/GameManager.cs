@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void dead(){
-        hud.gameEnd=true;
+        hud.GameEnd();
         storeHighScore();
         player.animator.SetTrigger("die");
         spawners.SetActive(false);
@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
             if(child.GetComponentInChildren<SpriteRenderer>()!=null)child.GetComponentInChildren<SpriteRenderer>().enabled=false;
         }
         StartCoroutine(vaultFall());
+        
     }
     
     IEnumerator vaultFall(){
@@ -50,12 +51,11 @@ public class GameManager : MonoBehaviour
     }
 
     void storeHighScore(){
-        if (hud.gameEnd == true){
-            if (hud.finalTime > PlayerPrefs.GetFloat("highscore", 0)){
-                PlayerPrefs.SetFloat("highscore", hud.finalTime);
-                PlayerPrefs.Save();
-                print("Highscore saved: " + PlayerPrefs.GetFloat("highscore", 0));
-            }
+        if (hud.finalTime > PlayerPrefs.GetFloat("highscore", 0)){
+            print("triggered");
+            PlayerPrefs.SetFloat("highscore", hud.finalTime);
+            PlayerPrefs.Save();
+            print("Highscore saved: " + PlayerPrefs.GetFloat("highscore", 0));
         }
     }
 
