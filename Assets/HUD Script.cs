@@ -14,10 +14,13 @@ public class HUDScript : MonoBehaviour
     int seconds;
     float ms;
     public bool gameEnd;
+    public float finalTime;
+    private bool run;
 
     
     void Start()
     {
+        run = true;
         ammo = 1;
         gameEnd = false;
     }
@@ -25,25 +28,29 @@ public class HUDScript : MonoBehaviour
     
     void Update()
     {
+        
+        if (gameEnd){
+            finalTime = Mathf.Round(currentTime * 100f) / 100f;
+            timerText.text = ' '.ToString();
+            ammoText.text = ' '.ToString();
+            run = false;
+        }
+
         //Timer
-        currentTime = Time.time - GameManager.Instance.startTime;
-        minutes = Mathf.FloorToInt(currentTime / 60);
-        seconds = Mathf.FloorToInt(currentTime % 60);
-        ms = (currentTime % 1)*100;
+        if (run){
+            currentTime = Time.time - GameManager.Instance.startTime;
+            minutes = Mathf.FloorToInt(currentTime / 60);
+            seconds = Mathf.FloorToInt(currentTime % 60);
+            ms = (currentTime % 1)*100;
 
-        if (minutes > 0){
-            timerText.text = string.Format("{0:00}:{1:00}.{2:00}",minutes, seconds, ms);
-        }
-        else{
-            timerText.text = string.Format("{0:00}.{1:00}",seconds, ms);
-        }
-
-        //ammo
-        ammoText.text = "Ammo: " + ammo.ToString() + "/1";
-
-        if (gameEnd == true){
-            timerText.text = ' ';
-            ammoText.text = ' ';
+            if (minutes > 0){
+                timerText.text = string.Format("{0:00}:{1:00}.{2:00}",minutes, seconds, ms);
+            }
+            else{
+                timerText.text = string.Format("{0:00}.{1:00}",seconds, ms);
+            }
+            ammoText.text = "Ammo: " + ammo.ToString() + "/1";
+    
         }
     }
 }
