@@ -13,11 +13,13 @@ public class HUDScript : MonoBehaviour
     int minutes;
     int seconds;
     float ms;
+    public bool gameEnd;
 
     
     void Start()
     {
         ammo = 1;
+        gameEnd = false;
     }
 
     
@@ -36,8 +38,12 @@ public class HUDScript : MonoBehaviour
             timerText.text = string.Format("{0:00}.{1:00}",seconds, ms);
         }
 
-
+        //ammo
         ammoText.text = "Ammo: " + ammo.ToString() + "/1";
 
+        if (gameEnd == true){
+            timerText.text = ' ';
+            ammoText.text = ' ';
+        }
     }
 }
