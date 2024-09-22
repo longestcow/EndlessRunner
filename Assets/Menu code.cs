@@ -11,7 +11,5 @@ public class Menucode : MonoBehaviour
         SceneManager.LoadScene(1); 
         
     }
-
-
 }
 

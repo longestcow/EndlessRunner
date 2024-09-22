@@ -49,7 +49,7 @@ public class HUDScript : MonoBehaviour
             else{
                 timerText.text = string.Format("{0:00}.{1:00}",seconds, ms);
             }
-            ammoText.text = "Ammo: " + ammo.ToString() + "/1";
+            ammoText.text = ammo.ToString();
     
         }
     }
