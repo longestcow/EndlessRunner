@@ -24,8 +24,8 @@ public class VaultDoor : MonoBehaviour
         if(over)return;
         if(Time.time>time){
             if(GameManager.Instance.currentVault == 4){
-                //gameOver
-                //
+                GameManager.Instance.dead();
+                return;
             }
             GameManager.Instance.platforms[GameManager.Instance.currentVault-1].SetActive(false);
             GameManager.Instance.currentVault+=1;
@@ -52,6 +52,7 @@ public class VaultDoor : MonoBehaviour
             //sfx
             if(col.gameObject == finalPlatform){
                 print("GAME OVER");
+                over=true;
                 // pull timer to middle, enter score etc
             }
         }
