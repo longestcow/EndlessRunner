@@ -8,8 +8,9 @@ public class HighscoreUpdaterScript : MonoBehaviour
     [SerializeField] TMP_Text highscoreText;
     void Start()
     {
-        print(PlayerPrefs.GetFloat("highscore", 0));
-        highscoreText.text = "Highscore: " + PlayerPrefs.GetFloat("highscore", 0);
+        float savedHighscore = PlayerPrefs.GetFloat("highscore", 0);
+        print("Loaded highscore: " + savedHighscore);
+        highscoreText.text = "Highscore: " + savedHighscore;
     }
 
     // Update is called once per frame

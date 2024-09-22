@@ -51,9 +51,12 @@ public class GameManager : MonoBehaviour
 
     void storeHighScore(){
         if (hud.gameEnd == true){
+             print("Highscore saved: " + PlayerPrefs.GetFloat("highscore", 0));
             if (hud.finalTime > PlayerPrefs.GetFloat("highscore", 0)){
                 PlayerPrefs.SetFloat("highscore", hud.finalTime);
-                print(PlayerPrefs.GetFloat("highscore", 0));
+                print("Highscore saved: " + PlayerPrefs.GetFloat("highscore", 0));
+                PlayerPrefs.Save();
+                print("Highscore saved: " + PlayerPrefs.GetFloat("highscore", 0));
             }
         }
     }
