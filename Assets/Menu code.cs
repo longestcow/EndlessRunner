@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Menucode : MonoBehaviour
 {
+   public Sprite DefaultSprite;
+    public Sprite HoverSprite;
     // Start is called before the first frame update
     public void startGame()
     {
@@ -13,8 +15,15 @@ public class Menucode : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void OnMouseOver()
     {
+        print("sdfsdfdsfdsfds");
+    }
 
+    void OnMouseExit() 
+    {
+        //transform.GetComponent<SpriteRenderer>().sprite = HoverSprite;
+        print("sdfsdfdsfdsfds");
     }
 }
+
