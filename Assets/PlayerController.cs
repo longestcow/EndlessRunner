@@ -39,10 +39,14 @@ public class PlayerController : MonoBehaviour
         print(stickVal);
 
         if(stickVal!=pStickVal){
-            if(stickVal==1 && currentRow-1!=GameManager.Instance.currentVault)
+            if(stickVal==1 && currentRow-1!=GameManager.Instance.currentVault){
                 currentRow-=1;
-            else if(stickVal==-1 && currentRow!=6)
+                SFXManager.Instance.playSFX(SFXManager.Instance.jump, transform.position, 1);
+            }
+            else if(stickVal==-1 && currentRow!=6){
                 currentRow+=1;
+                SFXManager.Instance.playSFX(SFXManager.Instance.fall, transform.position, 1);
+            }
         }
         
         rb.position = new Vector3(rb.position.x,GameManager.Instance.rowPositions[currentRow-1], 0);
@@ -58,8 +62,10 @@ public class PlayerController : MonoBehaviour
         if((Input.GetButtonDown("shoot") || ((int)Input.GetAxisRaw("Trigger"))!=0) && ammo){
             toggleAmmo();
             animator.SetTrigger("shoot");
+            SFXManager.Instance.playSFX(SFXManager.Instance.shoot, transform.position, 1);
             if(hit.collider.gameObject.layer==7) {
                 hit.collider.gameObject.GetComponent<LabExperiment>().convertAmmo();
+                SFXManager.Instance.playSFX(SFXManager.Instance.enemyDie, transform.position, 1);
                 vault.resetVault();
             }
             else {
@@ -85,10 +91,11 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.layer==11){
             if(!ammo)toggleAmmo();
             Destroy(other.gameObject);
+            SFXManager.Instance.playSFX(SFXManager.Instance.reload, transform.position, 1);
         }
     }
 
-    void toggleAmmo() { //sfx
+    void toggleAmmo() { 
         if(ammo){
             ammo = false;
             ammoIcon.color = new Color(0.8f,0.8f,0.8f,0.5f);

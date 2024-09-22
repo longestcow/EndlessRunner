@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     
     public GameObject[] platforms;
+
+    public Animator canvasAnim;
     void Awake() {
         Instance = this;
         GameStart();
@@ -26,10 +28,12 @@ public class GameManager : MonoBehaviour
 
     void GameStart(){
         startTime=Time.time;
+        SFXManager.Instance.gameTransition();
     }
 
     public void dead(){
         hud.GameEnd();
+        SFXManager.Instance.playSFX(SFXManager.Instance.playerDie, transform.position, 1);
         storeHighScore();
         player.animator.SetTrigger("die");
         spawners.SetActive(false);
@@ -48,6 +52,8 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i<platforms.Length; i++){
             platforms[i].SetActive(false);
         }
+        yield return new WaitForSeconds(2f);
+        canvasAnim.SetTrigger("gameEnd");
     }
 
     void storeHighScore(){

@@ -53,7 +53,10 @@ public class VaultDoor : MonoBehaviour
             if(col.gameObject == finalPlatform){
                 print("GAME OVER");
                 over=true;
-                // pull timer to middle, enter score etc
+                SFXManager.Instance.playSFX(SFXManager.Instance.vaultSlamBig, transform.position, 1);
+            }
+            else{
+                SFXManager.Instance.playSFX(SFXManager.Instance.vaultSlamSmall, transform.position, 1);
             }
         }
     }

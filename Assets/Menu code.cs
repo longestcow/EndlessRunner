@@ -9,7 +9,8 @@ public class Menucode : MonoBehaviour
     public void startGame()
     {
         SceneManager.LoadScene(1); 
-        
+        SFXManager.Instance.playSFX(SFXManager.Instance.startButton, transform.position, 1);
+            
     }
 }
 
