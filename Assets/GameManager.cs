@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public void dead(){
         hud.gameEnd=true;
+        storeHighScore();
         player.animator.SetTrigger("die");
         spawners.SetActive(false);
         ammoIcon.SetActive(false);
@@ -48,6 +49,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void storeHighScore(){
+        if (hud.gameEnd == true){
+            if (hud.finalTime > PlayerPrefs.GetFloat("highscore", 0)){
+                PlayerPrefs.SetFloat("highscore", hud.finalTime);
+                print(PlayerPrefs.GetFloat("highscore", 0));
+            }
+        }
+    }
 
 
 
