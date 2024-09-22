@@ -5,36 +5,39 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject enemyPrefab;
+    public GameObject enemyPrefab, obstaclePrefab;
+    float enemyOdds = 80, frequency = 5;
+    public int id;
     // public GameObject ammoPrefab, obstaclePrefab;
-    int curTime = 0;
-    void Start()
+    void Awake()
     {
+        enemyOdds = 80;
+        frequency = 5;
         StartCoroutine(spawnThing());
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        enemyOdds=Mathf.Clamp(enemyOdds-0.02f, 30, 80);
+        frequency=Mathf.Clamp(frequency+0.0075f, 5, 25);
+        GameManager.Instance.enemySpeed = Mathf.Clamp(GameManager.Instance.enemySpeed-0.002f, -8, -3);
     }
 
-    public void spawnEnemy(){
-        Instantiate(enemyPrefab, transform, false);
-    }
-    // public void spawnAmmo(){
-    //     Instantiate(ammoPrefab, transform, false);
-    // }
-    // public void spawnObstacle(){
-    //     Instantiate(obstaclePrefab, transform, false);
-    // }
+    
 
     IEnumerator spawnThing(){
         while(true){
-            yield return new WaitForSeconds(Random.Range(GameManager.Instance.spawnTimeRange[0], GameManager.Instance.spawnTimeRange[1]));
-            if(Random.Range(0,100)<5){
-                //flip a 50/50 coin for obstacle vs enemy
-                spawnEnemy();
+            yield return new WaitForSeconds(Random.Range(0.7f, 1f));
+            if(Random.Range(0,100)<frequency){//frequency
+                GameObject temp;
+                if(Random.Range(0,100)<enemyOdds)//ratio
+                    temp = Instantiate(enemyPrefab, transform, false);
+                else
+                    temp = Instantiate(obstaclePrefab, transform, false);
+                if(GameManager.Instance.newAmmo && id <= GameManager.Instance.currentVault-1){
+                    temp.GetComponent<LabExperiment>().convertAmmo();
+                    GameManager.Instance.newAmmo = false;
+                }
             }
         }
     }

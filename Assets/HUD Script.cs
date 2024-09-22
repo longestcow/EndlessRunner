@@ -7,9 +7,7 @@ public class HUDScript : MonoBehaviour
 {
     //Reference vaiable for the TMP text component
     [SerializeField] TMP_Text timerText;
-    [SerializeField] TMP_Text ammoText;
     float currentTime;
-    public int ammo;
     int minutes;
     int seconds;
     float ms;
@@ -21,7 +19,6 @@ public class HUDScript : MonoBehaviour
     void Start()
     {
         run = true;
-        ammo = 1;
         gameEnd = false;
     }
 
@@ -29,27 +26,23 @@ public class HUDScript : MonoBehaviour
     void Update()
     {
         
-        if (gameEnd){
+        if (gameEnd && run){
             finalTime = Mathf.Round(currentTime * 100f) / 100f;
-            timerText.text = ' '.ToString();
-            ammoText.text = ' '.ToString();
             run = false;
+            print(finalTime);
         }
-
-        //Timer
-        if (run){
+        else if (run){
             currentTime = Time.time - GameManager.Instance.startTime;
             minutes = Mathf.FloorToInt(currentTime / 60);
             seconds = Mathf.FloorToInt(currentTime % 60);
             ms = (currentTime % 1)*100;
 
             if (minutes > 0){
-                timerText.text = string.Format("{0:00}:{1:00}.{2:00}",minutes, seconds, ms);
+                timerText.text = string.Format("{0:00}:{1:00}.{2:00}",minutes, seconds, ms)+"s";
             }
             else{
-                timerText.text = string.Format("{0:00}.{1:00}",seconds, ms);
+                timerText.text = string.Format("{0:00}.{1:00}",seconds, ms)+"s";
             }
-            ammoText.text = ammo.ToString();
     
         }
     }

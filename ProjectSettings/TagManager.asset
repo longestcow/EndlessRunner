@@ -11,11 +11,11 @@ TagManager:
   - border
   - Water
   - UI
-  - createFloor
-  - playerEnemyCollision
-  - 
-  - 
-  - 
+  - player
+  - enemy
+  - vaultPlatform
+  - vault
+  - obstacle
   - 
   - 
   - 
