@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     }
     
     IEnumerator vaultFall(){
-        yield return new WaitForSeconds(2);//change time based on how long anim takes
+        yield return new WaitForSeconds(2f);//change time based on how long anim takes
         for(int i = 0; i<platforms.Length; i++){
             platforms[i].SetActive(false);
         }
