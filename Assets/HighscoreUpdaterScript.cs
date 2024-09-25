@@ -10,7 +10,7 @@ public class HighscoreUpdaterScript : MonoBehaviour
     {
         float savedHighscore = PlayerPrefs.GetFloat("highscore", 0);
         print("Loaded highscore: " + savedHighscore);
-        highscoreText.text = "Highscore: " + savedHighscore;
+        highscoreText.text = "Highscore: " + savedHighscore + "s";
     }
 
     // Update is called once per frame

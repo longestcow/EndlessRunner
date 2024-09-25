@@ -29,13 +29,14 @@ public class PlayerController : MonoBehaviour
         rb.position = new Vector3(-6f, GameManager.Instance.rowPositions[currentRow-1], 0);
         animator = GetComponent<Animator>();
         vault = GameObject.Find("VaultDoor").GetComponent<VaultDoor>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         if(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name=="gabeDead") return;
-        stickVal = Input.GetAxis("Vertical")>0.8f?1:Input.GetAxis("Vertical")<-0.8f?-1:0;
+        stickVal = Input.GetAxisRaw("Vertical")>0.8f?1:Input.GetAxisRaw("Vertical")<-0.8f?-1:0;
         print(stickVal);
 
         if(stickVal!=pStickVal){
@@ -51,15 +52,11 @@ public class PlayerController : MonoBehaviour
         
         rb.position = new Vector3(rb.position.x,GameManager.Instance.rowPositions[currentRow-1], 0);
 
-        mousePos=Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if(new Vector2(Input.GetAxis("RHorizontal"), Input.GetAxis("RVertical")) != Vector2.zero)
-            direction = new Vector2(Input.GetAxis("RHorizontal"), Input.GetAxis("RVertical")).normalized;
         RaycastHit2D hit = Physics2D.Raycast(gunPivot.transform.position, direction, 200, ~(1 << 8));
         line.SetPosition(0, gunPivot.transform.position);
         line.SetPosition(1,hit.point);
-        
 
-        if((Input.GetButtonDown("shoot") || ((int)Input.GetAxisRaw("Trigger"))!=0) && ammo){
+        if((Input.GetButtonDown("shoot") || ((int)Input.GetAxisRaw("Trigger"))!=0 || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.LeftShift)) && ammo){
             toggleAmmo();
             animator.SetTrigger("shoot");
             SFXManager.Instance.playSFX(SFXManager.Instance.shoot, transform.position, 1);
@@ -81,7 +78,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
         GameManager.Instance.newAmmo=true;
-
     }
 
     void OnTriggerEnter2D(Collider2D other) {

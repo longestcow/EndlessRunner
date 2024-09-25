@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int currentVault = 1;
     public float startTime = 0;
     public bool newAmmo = false;
-    public float[] rowPositions = {4.27f, 2.6f, 0.935f, -0.735f, -2.6f, -4.27f};
+    public float[] rowPositions = {4.17f, 2.5f, 0.835f, -0.835f, -2.5f, -4.17f};
     public GameObject world, spawners, ammoIcon, gun;
     public RawImage bg;
     public Texture black;

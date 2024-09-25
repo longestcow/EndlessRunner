@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8118775835905754583, guid: e5649714234c0c8419387ce5d9986eba, type: 3}
   obstaclePrefab: {fileID: 8118775835905754583, guid: c440c7af76849244e8d94cf4693b9b2c, type: 3}
-  id: 0
+  id: 5
 --- !u!1 &842013083
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,7 +2189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8118775835905754583, guid: e5649714234c0c8419387ce5d9986eba, type: 3}
   obstaclePrefab: {fileID: 8118775835905754583, guid: c440c7af76849244e8d94cf4693b9b2c, type: 3}
-  id: 0
+  id: 4
 --- !u!1 &1380425199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,7 +2491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8118775835905754583, guid: e5649714234c0c8419387ce5d9986eba, type: 3}
   obstaclePrefab: {fileID: 8118775835905754583, guid: c440c7af76849244e8d94cf4693b9b2c, type: 3}
-  id: 0
+  id: 2
 --- !u!1 &1570238619
 GameObject:
   m_ObjectHideFlags: 0
@@ -3176,7 +3176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8118775835905754583, guid: e5649714234c0c8419387ce5d9986eba, type: 3}
   obstaclePrefab: {fileID: 8118775835905754583, guid: c440c7af76849244e8d94cf4693b9b2c, type: 3}
-  id: 0
+  id: 3
 --- !u!1 &2029697758
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,7 +3223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8118775835905754583, guid: e5649714234c0c8419387ce5d9986eba, type: 3}
   obstaclePrefab: {fileID: 8118775835905754583, guid: c440c7af76849244e8d94cf4693b9b2c, type: 3}
-  id: 0
+  id: 6
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
