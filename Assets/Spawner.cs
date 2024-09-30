@@ -21,7 +21,6 @@ public class Spawner : MonoBehaviour
         enemyOdds=Mathf.Clamp(enemyOdds-0.03f, 10, 90);
         frequency=Mathf.Clamp(frequency+0.009f, 5, 50);
         GameManager.Instance.enemySpeed = Mathf.Clamp(GameManager.Instance.enemySpeed-0.005f, -12, -3);
-        print(frequency);
     }
 
     

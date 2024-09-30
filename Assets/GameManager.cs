@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] platforms;
 
     public Animator canvasAnim;
+    bool waiting;
     void Awake() {
         Instance = this;
         GameStart();
@@ -29,6 +31,14 @@ public class GameManager : MonoBehaviour
     void GameStart(){
         startTime=Time.time;
         SFXManager.Instance.gameTransition();
+    }
+
+    void Update(){
+        if(!waiting)return;
+        if (Input.GetButtonDown("shoot") || ((int)Input.GetAxisRaw("Trigger"))!=0 || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || (Input.touchCount>0 && Input.GetTouch(0).phase == TouchPhase.Began)){
+            waiting = false;
+            SceneManager.LoadScene(1);
+        }
     }
 
     public void dead(){
@@ -44,7 +54,6 @@ public class GameManager : MonoBehaviour
             if(child.GetComponentInChildren<SpriteRenderer>()!=null)child.GetComponentInChildren<SpriteRenderer>().enabled=false;
         }
         StartCoroutine(vaultFall());
-        
     }
     
     IEnumerator vaultFall(){
@@ -54,6 +63,8 @@ public class GameManager : MonoBehaviour
         }
         yield return new WaitForSeconds(2f);
         canvasAnim.SetTrigger("gameEnd");
+        yield return new WaitForSeconds(1.5f);
+        waiting = true;
     }
 
     void storeHighScore(){

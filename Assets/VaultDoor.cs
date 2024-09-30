@@ -16,6 +16,13 @@ public class VaultDoor : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("player").GetComponent<PlayerController>();
         time=Time.time+waitTime;
+
+
+        float cameraHeight = 2f * Camera.main.orthographicSize;
+        float cameraWidth = cameraHeight * Camera.main.aspect;
+        float spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
+        float scaleFactor = cameraWidth / spriteWidth;
+        transform.localScale = new Vector3(scaleFactor, 1, 1);
     }
 
     // Update is called once per frame
